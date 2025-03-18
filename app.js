@@ -150,7 +150,19 @@ let nextRound = () => {
     clickedCells[cell] = false;
   });
   clickedCells = {};
-  acc = 0;
+  acc = Number(current_raund.textContent) % 2 == 0 ? 1 : 0;
+
+  if (acc % 2 == 0) {
+    first_player.classList.remove("queue_x");
+    second_player.classList.remove("queue_nol");
+
+    first_player.classList.add("queue_x");
+  } else {
+    first_player.classList.remove("queue_x");
+    second_player.classList.remove("queue_nol");
+
+    second_player.classList.add("queue_nol");
+  }
 };
 
 let next_round_btn = document.querySelector(".next_round_btn");
