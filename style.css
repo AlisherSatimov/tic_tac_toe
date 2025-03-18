@@ -1,16 +1,82 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   background-color: #92d3f8;
+  font-family: sans-serif;
 }
 
 .container {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+button {
+  cursor: pointer;
+}
+
+.title_bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  /* height: 120px; */
+}
+
+.title_bar .fa-xmark {
+  font-size: 60px;
+}
+
+.title_bar .nol {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 10px solid green;
+  margin-top: 5px;
+}
+
+.x_status {
+  text-align: left;
+}
+
+.nol_status {
+  text-align: right;
+}
+
+.result_raund {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  font-size: 28px;
+  text-transform: uppercase;
+  gap: 10px;
+}
+
+.result,
+.raund {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  font-weight: 600;
+}
+
+.player {
+  font-size: 32px;
+  text-transform: capitalize;
+}
+
+/* tic tac toe */
+
+.tic_tac_toe {
   width: 900px;
   height: 900px;
-  margin: 20px auto 0;
+  margin: 100px auto 0;
   border: 3px solid #000;
   background-color: #000;
 
@@ -31,8 +97,8 @@ body {
 }
 
 .nol {
-  width: 50%;
-  height: 50%;
+  width: 70%;
+  height: 70%;
   border-radius: 50%;
   border: 35px solid green;
 }
@@ -40,4 +106,107 @@ body {
 .fa-xmark {
   font-size: 300px;
   color: red;
+}
+
+/* modal */
+
+.modal {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+.modal input {
+  display: block;
+  margin: 10px auto;
+  padding: 8px;
+  width: 80%;
+  width: 400px;
+}
+.modal button,
+.nextRoundModal button {
+  margin: 10px;
+  padding: 8px 12px;
+}
+
+.modal_title {
+  padding: 0px 0 20px;
+}
+
+/* next round modal */
+
+.nextRoundModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+}
+
+.round_winner {
+  width: 200px;
+}
+
+/* winner modal */
+
+.winnerModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.winner {
+  width: 700px;
+  height: 300px;
+  background-color: gold;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 52px;
+  text-transform: uppercase;
+  font-weight: 600;
+
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.restart_btn {
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 10px;
+}
+
+.queue_nol {
+  text-shadow: 0 0 15px #fff, 0 0 20px #fff, 0 0 25px #fff, 0 0 30px #49ff18,
+    0 0 40px #49ff18, 0 0 50px #49ff18, 0 0 65px #49ff18, 0 0 85px #49ff18;
+}
+
+.queue_x {
+  text-shadow: #fff 0px 0px 15px, #fff 0px 0px 20px, #fff 0px 0px 25px,
+    #ff2d95 0px 0px 30px, #ff2d95 0px 0px 40px, #ff2d95 0px 0px 50px,
+    #ff2d95 0px 0px 60px, #ff2d95 0px 0px 85px;
 }

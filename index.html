@@ -13,15 +13,81 @@
   </head>
   <body>
     <div class="container">
-      <div class="box bir"></div>
-      <div class="box ikki"></div>
-      <div class="box uch"></div>
-      <div class="box tort"></div>
-      <div class="box besh"></div>
-      <div class="box olti"></div>
-      <div class="box yetti"></div>
-      <div class="box sakkiz"></div>
-      <div class="box toqqiz"></div>
+      <div class="title_bar">
+        <div>
+          <h4 class="first_player player queue_x">player 1</h4>
+          <div class="x_status">
+            <i class="fa-solid fa-xmark"></i>
+          </div>
+        </div>
+        <div class="result_raund">
+          <div class="raund">
+            <p>raunds:</p>
+
+            <p class="current_raund">1</p>
+            <p>/</p>
+            <p class="total_raund">3</p>
+          </div>
+          <div class="result">
+            <p>result:</p>
+
+            <p class="fp_ball">0</p>
+            <p>:</p>
+            <p class="sp_ball">0</p>
+          </div>
+        </div>
+        <div>
+          <h4 class="second_player player">player 2</h4>
+          <div class="nol_status">
+            <div class="nol"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tic_tac_toe">
+        <div class="box bir"></div>
+        <div class="box ikki"></div>
+        <div class="box uch"></div>
+        <div class="box tort"></div>
+        <div class="box besh"></div>
+        <div class="box olti"></div>
+        <div class="box yetti"></div>
+        <div class="box sakkiz"></div>
+        <div class="box toqqiz"></div>
+      </div>
+    </div>
+
+    <!-- Info Modal -->
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <h2 class="modal_title">Ma'lumotlarni kiriting</h2>
+        <label for="firstPlayerName">Birinchi o'yinchi ismi</label>
+        <input type="text" id="firstPlayerName" placeholder="Player 1" />
+        <label for="secondPlayerName">Ikkinchi o'yinchi ismi</label>
+        <input type="text" id="secondPlayerName" placeholder="Player 2" />
+        <label for="raundCount">Raundlar sonini kiriting</label>
+        <input type="number" id="raundCount" placeholder="Raunds" />
+        <button onclick="saveData()">Start Game</button>
+      </div>
+    </div>
+
+    <!-- next round modal -->
+
+    <div class="nextRoundModal">
+      <div class="modal-content">
+        <div class="round_winner modal_title">Player 0</div>
+        <button class="next_round_btn">Next Round</button>
+      </div>
+    </div>
+
+    <!-- WINNER -->
+
+    <div class="winnerModal">
+      <div class="winner">alisher</div>
+      <button class="restart_btn" onclick="window.location.reload()">
+        Restart Game
+      </button>
     </div>
 
     <script src="/app.js"></script>
