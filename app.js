@@ -1,35 +1,50 @@
-// Players info
+// === O'yinchilar va raund ma'lumotlari ===
 
 let first_player = document.querySelector(".first_player");
 let second_player = document.querySelector(".second_player");
 
 let winner = document.querySelector(".winner");
 
-// rounds info
-
-let current_raund = document.querySelector(".current_raund");
-let total_raund = document.querySelector(".total_raund");
-
-// result info
+let current_round = document.querySelector(".current_round");
+let total_round = document.querySelector(".total_round");
 
 let fp_ball = document.querySelector(".fp_ball");
 let sp_ball = document.querySelector(".sp_ball");
 
-// modal
+// === Modal oynalar ===
 
 function closeModal() {
   document.getElementById("myModal").style.display = "none";
 }
 
 function saveData() {
-  first_player.textContent = document.getElementById("firstPlayerName").value;
-  second_player.textContent = document.getElementById("secondPlayerName").value;
-  total_raund.textContent = document.getElementById("raundCount").value;
+  let firstPlayerInput = document.getElementById("firstPlayerName");
+  let secondPlayerInput = document.getElementById("secondPlayerName");
+  let roundCountInput = document.getElementById("roundCount");
+
+  // === Xatoliklarni tekshirish ===
+  if (!firstPlayerInput || !secondPlayerInput || !roundCountInput) {
+    console.error("Kiritish maydonlari topilmadi!");
+    return;
+  }
+
+  if (
+    !firstPlayerInput.value ||
+    !secondPlayerInput.value ||
+    !roundCountInput.value
+  ) {
+    alert("Barcha maydonlarni to'ldiring!");
+    return;
+  }
+
+  first_player.textContent = firstPlayerInput.value;
+  second_player.textContent = secondPlayerInput.value;
+  total_round.textContent = roundCountInput.value;
 
   closeModal();
 }
 
-// tic tac toe
+// === Tic-Tac-Toe o'yini ===
 
 let cells = [
   "bir",
@@ -44,139 +59,146 @@ let cells = [
 ];
 
 let winPatterns = [
-  [".bir", ".ikki", ".uch"], // Gorizontal 1-qator
-  [".tort", ".besh", ".olti"], // Gorizontal 2-qator
-  [".yetti", ".sakkiz", ".toqqiz"], // Gorizontal 3-qator
-  [".bir", ".tort", ".yetti"], // Vertikal 1-ustun
-  [".ikki", ".besh", ".sakkiz"], // Vertikal 2-ustun
-  [".uch", ".olti", ".toqqiz"], // Vertikal 3-ustun
-  [".bir", ".besh", ".toqqiz"], // Diagonal chapdan o‘ngga
-  [".uch", ".besh", ".yetti"], // Diagonal o‘ngdan chapga
+  [".bir", ".ikki", ".uch"],
+  [".tort", ".besh", ".olti"],
+  [".yetti", ".sakkiz", ".toqqiz"],
+  [".bir", ".tort", ".yetti"],
+  [".ikki", ".besh", ".sakkiz"],
+  [".uch", ".olti", ".toqqiz"],
+  [".bir", ".besh", ".toqqiz"],
+  [".uch", ".besh", ".yetti"],
 ];
 
 let acc = 0;
 let clickedCells = {};
 
-cells.map((cell) => {
+// === Har bir katakka event qo'shish ===
+cells.forEach((cell) => {
   let element = document.querySelector(`.${cell}`);
 
   clickedCells[cell] = false;
 
   element.addEventListener("click", () => {
-    if (clickedCells[cell]) {
-      ("");
+    if (clickedCells[cell]) return;
+
+    clickedCells[cell] = true;
+    let mark = document.createElement(acc % 2 === 0 ? "i" : "div");
+
+    if (acc % 2 === 0) {
+      mark.classList.add("fa-solid", "fa-xmark");
+      first_player.classList.toggle("queue_x");
+      second_player.classList.toggle("queue_nol");
     } else {
-      clickedCells[cell] = true;
-      let mark = document.createElement(acc % 2 == 0 ? "i" : "div");
-
-      if (acc % 2 == 0) {
-        mark.classList.add("fa-solid", "fa-xmark");
-        first_player.classList.toggle("queue_x");
-        second_player.classList.toggle("queue_nol");
-      } else {
-        mark.classList.add("nol");
-        first_player.classList.toggle("queue_x");
-        second_player.classList.toggle("queue_nol");
-      }
-
-      element.appendChild(mark);
-      acc++;
-
-      winPatterns.forEach((pattern) => {
-        let cells = pattern.map((selector) => document.querySelector(selector));
-        if (cells.every((cell) => cell.innerHTML.includes("fa-xmark"))) {
-          fp_ball.textContent = Number(fp_ball.textContent) + 1;
-          cells.forEach((cell) => (cell.style.backgroundColor = "aqua"));
-          if (
-            Number(current_raund.textContent) < Number(total_raund.textContent)
-          ) {
-            document.querySelector(".nextRoundModal").style.display = "flex";
-            document.querySelector(".round_winner").textContent =
-              "Bu raund X yutdi";
-          } else if (fp_ball.textContent > sp_ball.textContent) {
-            winner.textContent = `${first_player.textContent} yutdi`;
-            document.querySelector(".winnerModal").style.display = "flex";
-          } else if (fp_ball.textContent < sp_ball.textContent) {
-            winner.textContent = `${second_player.textContent} yutdi`;
-            document.querySelector(".winnerModal").style.display = "flex";
-          }
-        } else if (cells.every((cell) => cell.innerHTML.includes("nol"))) {
-          sp_ball.textContent = Number(sp_ball.textContent) + 1;
-          cells.forEach((cell) => (cell.style.backgroundColor = "red"));
-          if (
-            Number(current_raund.textContent) < Number(total_raund.textContent)
-          ) {
-            document.querySelector(".nextRoundModal").style.display = "flex";
-            document.querySelector(".round_winner").textContent =
-              "Bu raund 0 yutdi";
-          } else if (fp_ball.textContent > sp_ball.textContent) {
-            winner.textContent = `${first_player.textContent} yutdi`;
-            document.querySelector(".winnerModal").style.display = "flex";
-          } else if (fp_ball.textContent < sp_ball.textContent) {
-            winner.textContent = `${second_player.textContent} yutdi`;
-            document.querySelector(".winnerModal").style.display = "flex";
-          }
-        } else {
-          let tableIsFull = 0;
-
-          for (const key in clickedCells) {
-            if (clickedCells[key] == true) {
-              tableIsFull++;
-            }
-            if (tableIsFull == 9) {
-              document.querySelector(".round_winner").textContent =
-                "Bu raund Durrang bo'ldi";
-
-              document.querySelector(".nextRoundModal").style.display = "flex";
-            }
-          }
-        }
-      });
+      mark.classList.add("nol");
+      first_player.classList.toggle("queue_x");
+      second_player.classList.toggle("queue_nol");
     }
+
+    element.appendChild(mark);
+    acc++;
+
+    checkWinCondition();
   });
 });
 
-// clear table
+// === G'alabani tekshirish funksiyasi ===
 
-let everyBox = document.querySelectorAll(".box");
+function checkWinCondition() {
+  let winnerFound = false;
 
-let nextRound = () => {
-  everyBox.forEach((box) => {
+  winPatterns.forEach((pattern) => {
+    let cells = pattern.map((selector) => document.querySelector(selector));
+
+    if (cells.every((cell) => cell.innerHTML.includes("fa-xmark"))) {
+      updateScore("X");
+      winnerFound = true;
+    } else if (cells.every((cell) => cell.innerHTML.includes("nol"))) {
+      updateScore("O");
+      winnerFound = true;
+    }
+  });
+
+  if (!winnerFound) checkDraw();
+}
+
+// === Hisobni yangilash funksiyasi ===
+
+function updateScore(winnerSymbol) {
+  if (!fp_ball || !sp_ball) {
+    console.error("fp_ball yoki sp_ball elementi topilmadi!");
+    return;
+  }
+
+  if (winnerSymbol === "X") {
+    fp_ball.textContent = Number(fp_ball.textContent) + 1;
+    showWinnerOrNextRound("Bu raund X yutdi");
+  } else if (winnerSymbol === "O") {
+    sp_ball.textContent = Number(sp_ball.textContent) + 1;
+    showWinnerOrNextRound("Bu raund 0 yutdi");
+  }
+}
+
+// === Durrangni tekshirish funksiyasi ===
+
+function checkDraw() {
+  let tableIsFull = Object.values(clickedCells).every((cell) => cell);
+
+  if (tableIsFull) {
+    document.querySelector(".round_winner").textContent =
+      "Bu raund Durrang bo'ldi";
+    document.querySelector(".nextRoundModal").style.display = "flex";
+  }
+}
+
+// === O'yinni tugatish yoki yangi raundga o'tish ===
+
+function showWinnerOrNextRound(round_winner) {
+  if (Number(current_round.textContent) < Number(total_round.textContent)) {
+    document.querySelector(".nextRoundModal").style.display = "flex";
+    document.querySelector(".round_winner").textContent = round_winner;
+  } else {
+    let fpScore = Number(fp_ball.textContent);
+    let spScore = Number(sp_ball.textContent);
+
+    if (fpScore > spScore) {
+      winner.textContent = `${first_player.textContent} yutdi`;
+    } else if (fpScore < spScore) {
+      winner.textContent = `${second_player.textContent} yutdi`;
+    } else {
+      winner.textContent = "durrang";
+    }
+
+    document.querySelector(".winnerModal").style.display = "flex";
+  }
+}
+
+// === Yangi raundni boshlash ===
+
+function nextRound() {
+  document.querySelectorAll(".box").forEach((box) => {
     box.innerHTML = "";
-
     box.style.backgroundColor = "white";
   });
-  cells.map((cell) => {
+
+  cells.forEach((cell) => {
     clickedCells[cell] = false;
   });
-  clickedCells = {};
-  acc = Number(current_raund.textContent) % 2 == 0 ? 1 : 0;
 
-  if (acc % 2 == 0) {
-    first_player.classList.remove("queue_x");
-    second_player.classList.remove("queue_nol");
+  acc = Number(current_round.textContent) % 2 === 0 ? 1 : 0;
 
-    first_player.classList.add("queue_x");
+  first_player.classList.toggle("queue_x", acc % 2 === 0);
+  second_player.classList.toggle("queue_nol", acc % 2 !== 0);
+}
+
+// === Keyingi raund tugmachasi uchun event ===
+
+document.querySelector(".next_round_btn").addEventListener("click", () => {
+  if (Number(current_round.textContent) < Number(total_round.textContent)) {
+    current_round.textContent = Number(current_round.textContent) + 1;
+    nextRound();
   } else {
-    first_player.classList.remove("queue_x");
-    second_player.classList.remove("queue_nol");
-
-    second_player.classList.add("queue_nol");
+    showWinnerOrNextRound();
   }
-};
 
-let next_round_btn = document.querySelector(".next_round_btn");
-
-next_round_btn.addEventListener("click", () => {
-  if (Number(current_raund.textContent) < Number(total_raund.textContent)) {
-    current_raund.textContent = Number(current_raund.textContent) + 1;
-  } else if (fp_ball.textContent > sp_ball.textContent) {
-    winner.textContent = `${first_player.textContent} yutdi`;
-    document.querySelector(".winnerModal").style.display = "flex";
-  } else if (fp_ball.textContent < sp_ball.textContent) {
-    winner.textContent = `${second_player.textContent} yutdi`;
-    document.querySelector(".winnerModal").style.display = "flex";
-  }
-  nextRound();
   document.querySelector(".nextRoundModal").style.display = "none";
 });
