@@ -22,13 +22,13 @@ body {
 
 @media (max-width: 800px) {
   .container {
-    width: 481px;
+    width: 500px;
   }
 }
 
 @media (max-width: 500px) {
   .container {
-    width: 381px;
+    width: 400px;
   }
 }
 
@@ -117,17 +117,25 @@ button {
 
 @media (max-width: 1240px) {
   .tic_tac_toe {
-    width: 600px;
-    height: 600px;
-    margin: 60px auto 0;
+    width: 700px;
+    height: 700px;
+    margin: 120px auto 0;
   }
 }
 
 @media (max-width: 800px) {
   .tic_tac_toe {
+    width: 500px;
+    height: 500px;
+    margin: 150px auto 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .tic_tac_toe {
     width: 400px;
     height: 400px;
-    margin: 40px auto 0;
+    margin: 150px auto 0;
   }
 }
 
@@ -174,7 +182,7 @@ button {
 /* modal */
 
 .modal {
-  display: none;
+  display: flex;
   position: fixed;
   top: 0;
   left: 0;
@@ -195,7 +203,7 @@ button {
   margin: 10px auto;
   padding: 8px;
   width: 80%;
-  width: 400px;
+  width: 360px;
 }
 .modal button,
 .nextRoundModal button {
