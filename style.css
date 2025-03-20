@@ -14,6 +14,24 @@ body {
   margin: 0 auto;
 }
 
+@media (max-width: 1240px) {
+  .container {
+    width: 769px;
+  }
+}
+
+@media (max-width: 800px) {
+  .container {
+    width: 481px;
+  }
+}
+
+@media (max-width: 500px) {
+  .container {
+    width: 381px;
+  }
+}
+
 button {
   cursor: pointer;
 }
@@ -23,7 +41,6 @@ button {
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
-  /* height: 120px; */
 }
 
 .title_bar .fa-xmark {
@@ -71,6 +88,16 @@ button {
   text-transform: capitalize;
 }
 
+@media (max-width: 800px) {
+  .result_round {
+    font-size: 24px;
+  }
+
+  .player {
+    font-size: 24px;
+  }
+}
+
 /* tic tac toe */
 
 .tic_tac_toe {
@@ -84,6 +111,24 @@ button {
   flex-wrap: wrap;
   justify-content: space-between;
   align-content: space-between;
+}
+
+/* media query */
+
+@media (max-width: 1240px) {
+  .tic_tac_toe {
+    width: 600px;
+    height: 600px;
+    margin: 60px auto 0;
+  }
+}
+
+@media (max-width: 800px) {
+  .tic_tac_toe {
+    width: 400px;
+    height: 400px;
+    margin: 40px auto 0;
+  }
 }
 
 .box {
@@ -108,10 +153,28 @@ button {
   color: red;
 }
 
+@media (max-width: 1240px) {
+  .fa-xmark {
+    font-size: 220px;
+  }
+  .nol {
+    border: 25px solid green;
+  }
+}
+
+@media (max-width: 800px) {
+  .fa-xmark {
+    font-size: 140px;
+  }
+  .nol {
+    border: 18px solid green;
+  }
+}
+
 /* modal */
 
 .modal {
-  display: flex;
+  display: none;
   position: fixed;
   top: 0;
   left: 0;
